@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>暦アプリ - カレンダー・六曜・和暦変換</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- ナビゲーション -->
+    <nav class="nav">
+      <button class="nav-tab active" data-tab="calendar">カレンダー</button>
+      <button class="nav-tab" data-tab="converter">和暦変換</button>
+      <button class="nav-tab" data-tab="calculator">日数計算</button>
+    </nav>
+
+    <!-- カレンダータブ -->
+    <section class="tab-content active" id="tab-calendar">
+      <div class="calendar-panel">
+        <header class="calendar-header">
+          <button class="btn-nav" id="prev-month">←</button>
+          <h2 class="calendar-title" id="calendar-title"></h2>
+          <button class="btn-nav" id="next-month">→</button>
+        </header>
+
+        <div class="view-toggle">
+          <button class="view-btn active" data-view="month">月</button>
+          <button class="view-btn" data-view="week">週</button>
+          <button class="view-btn" data-view="day">日</button>
+        </div>
+
+        <div class="weekday-row">
+          <span class="weekday sun">日</span>
+          <span class="weekday">月</span>
+          <span class="weekday">火</span>
+          <span class="weekday">水</span>
+          <span class="weekday">木</span>
+          <span class="weekday">金</span>
+          <span class="weekday sat">土</span>
+        </div>
+
+        <div class="calendar-grid" id="calendar-grid"></div>
+
+        <button class="btn-today" id="today-btn">今日</button>
+      </div>
+
+      <!-- 日付詳細パネル -->
+      <div class="detail-panel" id="detail-panel">
+        <h3 class="detail-title" id="detail-title">日付を選択</h3>
+        <div class="detail-info" id="detail-info"></div>
+      </div>
+    </section>
+
+    <!-- 和暦変換タブ -->
+    <section class="tab-content" id="tab-converter">
+      <div class="converter-grid">
+        <div class="panel">
+          <h3 class="panel-title">西暦 → 和暦</h3>
+          <div class="input-group">
+            <label class="label">西暦</label>
+            <input type="number" id="seireki-input" class="input" placeholder="2026" min="1">
+          </div>
+          <button class="btn" id="seireki-btn">変換</button>
+          <div class="result-box" id="seireki-result"></div>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-title">和暦 → 西暦</h3>
+          <div class="input-group">
+            <label class="label">元号</label>
+            <select id="era-select" class="input">
+              <option value="令和">令和</option>
+              <option value="平成">平成</option>
+              <option value="昭和">昭和</option>
+              <option value="大正">大正</option>
+              <option value="明治">明治</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="label">年</label>
+            <input type="number" id="wareki-input" class="input" placeholder="8" min="1">
+          </div>
+          <button class="btn" id="wareki-btn">変換</button>
+          <div class="result-box" id="wareki-result"></div>
+        </div>
+
+        <div class="panel panel-wide">
+          <h3 class="panel-title">十二支を調べる</h3>
+          <div class="input-group">
+            <label class="label">西暦</label>
+            <input type="number" id="junishi-input" class="input" placeholder="2026" min="1">
+          </div>
+          <button class="btn" id="junishi-btn">調べる</button>
+          <div class="result-box result-junishi" id="junishi-result"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">元号一覧</h3>
+        <div class="era-table" id="era-table"></div>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">十二支一覧</h3>
+        <div class="junishi-grid" id="junishi-grid"></div>
+      </div>
+    </section>
+
+    <!-- 日数計算タブ -->
+    <section class="tab-content" id="tab-calculator">
+      <div class="converter-grid">
+        <div class="panel">
+          <h3 class="panel-title">日数計算</h3>
+          <div class="input-group">
+            <label class="label">開始日</label>
+            <input type="date" id="calc-start" class="input">
+          </div>
+          <div class="input-group">
+            <label class="label">終了日</label>
+            <input type="date" id="calc-end" class="input">
+          </div>
+          <button class="btn" id="calc-days-btn">計算</button>
+          <div class="result-box" id="calc-days-result"></div>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-title">年齢計算</h3>
+          <div class="input-group">
+            <label class="label">生年月日</label>
+            <input type="date" id="birth-date" class="input">
+          </div>
+          <button class="btn" id="calc-age-btn">計算</button>
+          <div class="result-box" id="calc-age-result"></div>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-title">N日後を計算</h3>
+          <div class="input-group">
+            <label class="label">基準日</label>
+            <input type="date" id="base-date" class="input">
+          </div>
+          <div class="input-group">
+            <label class="label">日数</label>
+            <input type="number" id="days-offset" class="input" placeholder="30">
+          </div>
+          <button class="btn" id="calc-offset-btn">計算</button>
+          <div class="result-box" id="calc-offset-result"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
